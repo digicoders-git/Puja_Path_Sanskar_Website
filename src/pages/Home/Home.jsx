@@ -6,21 +6,21 @@ import FilterSidebar from "../../components/ui/FilterSidebar"
 import {
   MapPin, Phone, ArrowRight, Calendar, Clock,
   ShieldCheck, Star, MessageSquare, UserPlus, CheckCircle,
-  Flame, Trophy, TrendingUp, BookOpen, Users, Search
+  Flame, Trophy, TrendingUp, BookOpen, Users, Search, Sparkles, Flower2, Heart,
+  Baby, Moon, Star as StarIcon
 } from "lucide-react"
-import { GiElephant, GiLotus, GiPrayerBeads } from "react-icons/gi"
-import { FaRing, FaBaby, FaMoon } from "react-icons/fa"
+
 import logoImg from "../../assets/img.jpeg"
 
 const categories = [
-  { icon: <FaRing size={28} className="text-pink-500" />, label: "Vivah Puja" },
+  { icon: <Heart size={28} className="text-pink-500" />, label: "Vivah Puja" },
   { icon: <BookOpen size={28} className="text-blue-500" />, label: "Griha Pravesh" },
-  { icon: <GiElephant size={28} className="text-gray-600" />, label: "Ganesh Puja" },
-  { icon: <GiLotus size={28} className="text-pink-400" />, label: "Navratri Puja" },
-  { icon: <GiPrayerBeads size={28} className="text-orange-500" />, label: "Satyanarayan" },
+  { icon: <Sparkles size={28} className="text-gray-600" />, label: "Ganesh Puja" },
+  { icon: <Flower2 size={28} className="text-pink-400" />, label: "Navratri Puja" },
+  { icon: <StarIcon size={28} className="text-orange-500" />, label: "Satyanarayan" },
   { icon: <Flame size={28} className="text-red-500" />, label: "Havan" },
-  { icon: <FaBaby size={28} className="text-yellow-500" />, label: "Namkaran" },
-  { icon: <FaMoon size={28} className="text-indigo-500" />, label: "Shradh Puja" },
+  { icon: <Baby size={28} className="text-yellow-500" />, label: "Namkaran" },
+  { icon: <Moon size={28} className="text-indigo-500" />, label: "Shradh Puja" },
 ]
 
 const stats = [
@@ -45,10 +45,10 @@ const testimonials = [
 ]
 
 const upcomingFestivals = [
-  { name: "Ganesh Chaturthi", date: "7 Sep 2025", days: "Coming Soon", color: "bg-yellow-50 border-yellow-200", textColor: "text-yellow-700", icon: <GiElephant size={28} className="text-yellow-600" /> },
-  { name: "Navratri", date: "22 Sep 2025", days: "Coming Soon", color: "bg-red-50 border-red-200", textColor: "text-red-600", icon: <GiLotus size={28} className="text-red-500" /> },
+  { name: "Ganesh Chaturthi", date: "7 Sep 2025", days: "Coming Soon", color: "bg-yellow-50 border-yellow-200", textColor: "text-yellow-700", icon: <Sparkles size={28} className="text-yellow-600" /> },
+  { name: "Navratri", date: "22 Sep 2025", days: "Coming Soon", color: "bg-red-50 border-red-200", textColor: "text-red-600", icon: <Flower2 size={28} className="text-red-500" /> },
   { name: "Diwali Puja", date: "20 Oct 2025", days: "Coming Soon", color: "bg-orange-50 border-orange-200", textColor: "text-orange-600", icon: <Flame size={28} className="text-orange-500" /> },
-  { name: "Vivah Muhurat", date: "Nov–Dec 2025", days: "Season Open", color: "bg-pink-50 border-pink-200", textColor: "text-pink-600", icon: <FaRing size={24} className="text-pink-500" /> },
+  { name: "Vivah Muhurat", date: "Nov–Dec 2025", days: "Season Open", color: "bg-pink-50 border-pink-200", textColor: "text-pink-600", icon: <Heart size={24} className="text-pink-500" /> },
 ]
 
 // const pujaPackages = [
@@ -58,14 +58,15 @@ const upcomingFestivals = [
 // ]
 
 const sacredTexts = [
-  { title: "Significance of Griha Pravesh", desc: "Griha Pravesh is performed to purify the new home and invite positive energy. The ritual involves Vastu Shanti, Ganesh Puja, and Havan to bless the household.", icon: <BookOpen size={36} className="text-orange-500" /> },
-  { title: "Why Satyanarayan Katha?", desc: "Lord Vishnu's Satyanarayan Katha is performed on auspicious occasions to seek blessings for prosperity, health, and happiness in the family.", icon: <GiPrayerBeads size={36} className="text-orange-500" /> },
-  { title: "Importance of Vivah Puja", desc: "The Vivah ceremony is one of the 16 samskaras. The Saptapadi (7 vows) taken around the sacred fire bind two souls together for eternity.", icon: <FaRing size={32} className="text-orange-500" /> },
+  { title: "Significance of Griha Pravesh", desc: "Griha Pravesh is performed to purify the new home and invite positive energy. The ritual involves Vastu Shanti, Ganesh Puja, and Havan to bless the household.", extra: "The ceremony is ideally performed on an auspicious muhurat chosen by a pandit. It includes Navagraha Puja, Vastu Devata worship, and lighting of the sacred fire. The ritual ensures the home is free from negative energies and blesses all family members with health, wealth, and harmony.", icon: <BookOpen size={36} className="text-orange-500" /> },
+  { title: "Why Satyanarayan Katha?", desc: "Lord Vishnu's Satyanarayan Katha is performed on auspicious occasions to seek blessings for prosperity, health, and happiness in the family.", extra: "The Katha narrates five stories from the Skanda Purana and is typically performed on Purnima (full moon day), during housewarmings, marriages, or business inaugurations. Devotees offer panchamrit, fruits, and tulsi leaves. It is believed that sincere observance fulfills all wishes and removes obstacles from life.", icon: <StarIcon size={36} className="text-orange-500" /> },
+  { title: "Importance of Vivah Puja", desc: "The Vivah ceremony is one of the 16 samskaras. The Saptapadi (7 vows) taken around the sacred fire bind two souls together for eternity.", extra: "The Vivah rituals include Ganesh Puja, Var Mala, Kanyadan, Mangalsutra ceremony, and Sindoor Daan. Each ritual holds deep spiritual significance. The sacred fire (Agni) is the divine witness to the union. A qualified pandit ensures all rituals are performed in the correct sequence with proper Vedic mantras.", icon: <Heart size={32} className="text-orange-500" /> },
 ]
 
 const ITEMS_PER_PAGE = 6
 
 const Home = () => {
+  const [expandedCard, setExpandedCard] = useState(null)
   const [currentPage, setCurrentPage] = useState(1)
   const [filters, setFilters] = useState({ city: "All Cities", specializations: [], experience: "", rating: "" })
   const navigate = useNavigate()
@@ -307,8 +308,11 @@ const Home = () => {
                 <span className="text-4xl mb-3 block">{item.icon}</span>
                 <h3 className="font-bold text-gray-800 mb-2">{item.title}</h3>
                 <p className="text-sm text-gray-500 leading-relaxed">{item.desc}</p>
-                <button className="mt-4 text-orange-500 text-sm font-semibold flex items-center gap-1 hover:underline">
-                  Read More <ArrowRight size={13} />
+                {expandedCard === item.title && (
+                  <p className="text-sm text-gray-500 leading-relaxed mt-3 border-t border-amber-100 pt-3">{item.extra}</p>
+                )}
+                <button onClick={() => setExpandedCard(expandedCard === item.title ? null : item.title)} className="mt-4 text-orange-500 text-sm font-semibold flex items-center gap-1 hover:underline">
+                  {expandedCard === item.title ? "Show Less" : "Read More"} <ArrowRight size={13} className={expandedCard === item.title ? "rotate-90" : ""} />
                 </button>
               </div>
             ))}
@@ -373,7 +377,7 @@ const Home = () => {
             <button onClick={() => navigate("/register")} className="bg-orange-500 text-white font-semibold px-8 py-3 rounded-full hover:bg-orange-600 transition flex items-center justify-center gap-2 shadow">
               <UserPlus size={18} /> Register as Pandit
             </button>
-            <button onClick={() => navigate("/contact")} className="border-2 border-orange-400 text-orange-600 font-semibold px-8 py-3 rounded-full hover:bg-orange-50 transition flex items-center justify-center gap-2">
+            <button onClick={() => navigate("/contact")} className="border-2 border-orange-400 text-orange-600 font-semibold px-8 py-3 rounded-full hover:bg-orange-200 transition flex items-center justify-center gap-2">
               <Phone size={18} /> Contact Us
             </button>
           </div>

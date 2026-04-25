@@ -166,7 +166,7 @@ const Navbar = ({ navRef }) => {
                 placeholder="Search pandit or puja..."
                 className="flex-1 min-w-0 px-3 py-1.5 text-gray-600 text-xs outline-none w-64"
               />
-              <button type="submit" onClick={handleSearchClick} className="bg-orange-600 hover:bg-orange-700 px-3 py-1.5 text-white flex items-center shrink-0 transition">
+              <button type="submit" onClick={handleSearchClick} className="bg-orange-500 hover:bg-orange-700 px-3 py-1.5 text-white flex items-center shrink-0 transition">
                 <FiSearch size={13} />
               </button>
             </form>
