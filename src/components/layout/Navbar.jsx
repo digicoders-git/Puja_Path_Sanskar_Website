@@ -1,8 +1,9 @@
 import { useState } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
-import { FiSearch, FiMenu, FiX, FiLogIn, FiUserPlus, FiHome, FiUsers, FiBook, FiPhone, FiEye, FiEyeOff } from "react-icons/fi"
+import { FiSearch, FiMenu, FiX, FiUserPlus, FiHome, FiUsers, FiBook, FiPhone, FiEye, FiEyeOff, FiLogIn } from "react-icons/fi"
 import { FaCheckCircle } from "react-icons/fa"
 import logoImg from "../../assets/img.jpeg"
+import { useLogin } from "../../context/LoginContext"
 
 const LoginModal = ({ onClose }) => {
   const [form, setForm] = useState({ email: "", password: "" })
@@ -121,8 +122,18 @@ const Navbar = ({ navRef }) => {
 
   const handleSearch = (e) => {
     e.preventDefault()
-    if (searchQuery.trim()) {
-      navigate(`/pandits?search=${encodeURIComponent(searchQuery.trim())}`)
+    const q = searchQuery.trim()
+    if (q) {
+      navigate(`/pandits?search=${encodeURIComponent(q)}`)
+      setSearchQuery("")
+      setMenuOpen(false)
+    }
+  }
+
+  const handleSearchClick = () => {
+    const q = searchQuery.trim()
+    if (q) {
+      navigate(`/pandits?search=${encodeURIComponent(q)}`)
       setSearchQuery("")
       setMenuOpen(false)
     }
@@ -153,9 +164,9 @@ const Navbar = ({ navRef }) => {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search pandit or puja..."
-                className="flex-1 min-w-0 px-3 py-1.5 text-gray-600 text-xs outline-none"
+                className="flex-1 min-w-0 px-3 py-1.5 text-gray-600 text-xs outline-none w-64"
               />
-              <button type="submit" className="bg-orange-600 hover:bg-orange-700 px-3 py-1.5 text-white flex items-center shrink-0 transition">
+              <button type="submit" onClick={handleSearchClick} className="bg-orange-600 hover:bg-orange-700 px-3 py-1.5 text-white flex items-center shrink-0 transition">
                 <FiSearch size={13} />
               </button>
             </form>
@@ -168,10 +179,7 @@ const Navbar = ({ navRef }) => {
               </Link>
             ))}
             <div className="w-px h-5 bg-orange-400 shrink-0" />
-            <button onClick={() => setShowLogin(true)} className="flex items-center gap-1 bg-white text-orange-600 px-3 py-1.5 rounded-xl hover:bg-orange-50 font-semibold transition text-xs whitespace-nowrap shrink-0">
-              <FiLogIn size={13} /> Login
-            </button>
-            <button onClick={() => navigate("/register")} className="flex items-center gap-1 bg-orange-800 hover:bg-orange-900 text-white px-3 py-1.5 rounded-xl font-semibold border border-orange-300 transition text-xs whitespace-nowrap shrink-0">
+            <button onClick={() => navigate("/register")} className="flex items-center gap-1 bg-orange-500 hover:bg-orange-400 text-white px-3 py-1.5 rounded-xl font-semibold border border-white transition text-xs whitespace-nowrap shrink-0">
               <FiUserPlus size={13} /> Register
             </button>
           </div>
@@ -191,17 +199,15 @@ const Navbar = ({ navRef }) => {
                 placeholder="Search..."
                 className="flex-1 px-4 py-2 text-gray-700 text-xs outline-none"
               />
-              <button type="submit" className="bg-orange-500 px-3 text-white"><FiSearch size={14} /></button>
+              <button type="submit" onClick={handleSearchClick} className="bg-orange-500 px-3 text-white"><FiSearch size={14} /></button>
             </form>
             {navLinks.map(({ to, label, icon }) => (
               <Link key={to} to={to} className={`flex items-center gap-2 hover:text-orange-200 ${isActive(to) ? "font-bold" : ""}`} onClick={() => setMenuOpen(false)}>
                 {icon} {label}
               </Link>
             ))}
-            <button onClick={() => { setShowLogin(true); setMenuOpen(false) }} className="flex items-center justify-center gap-2 bg-white text-orange-600 px-4 py-2 rounded-full font-semibold">
-              <FiLogIn size={14} /> Login
-            </button>
-            <button onClick={() => { navigate("/register"); setMenuOpen(false) }} className="flex items-center justify-center gap-2 bg-orange-800 text-white px-4 py-2 rounded-full font-semibold">
+            
+            <button onClick={() => { navigate("/register"); setMenuOpen(false) }} className="flex items-center justify-center gap-2 bg-orange-500 text-white px-4 py-2 rounded-full font-semibold">
               <FiUserPlus size={14} /> Register
             </button>
           </div>

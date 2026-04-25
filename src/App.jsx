@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { useEffect, useRef } from "react"
+import { LoginProvider } from "./context/LoginContext"
 import Navbar from "./components/layout/Navbar"
 import Footer from "./components/layout/Footer"
 import Home from "./pages/Home/Home"
@@ -8,6 +9,7 @@ import Pujas from "./pages/Pujas/Pujas"
 import Contact from "./pages/Contact/Contact"
 import Register from "./pages/Register/Register"
 import NotFound from "./pages/NotFound/NotFound"
+// import LoginContext from "./context/LoginContext"
 
 function App() {
   const navRef = useRef(null)
@@ -28,22 +30,25 @@ function App() {
   }, [])
 
   return (
-    <BrowserRouter>
-      <div className="flex flex-col min-h-screen w-full overflow-x-hidden">
-        <Navbar navRef={navRef} />
-        <main id="main-content" className="flex-1">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/pandits" element={<Pandits />} />
-            <Route path="/pujas" element={<Pujas />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
-    </BrowserRouter>
+    <LoginProvider>
+      <BrowserRouter>
+        <div className="flex flex-col min-h-screen w-full overflow-x-hidden">
+          <Navbar navRef={navRef} />
+          <main id="main-content" className="flex-1">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/pandits" element={<Pandits />} />
+              <Route path="/pujas" element={<Pujas />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/register" element={<Register />} />
+              {/* <Route path="/login" element={<LoginContext />} /> */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
+      </BrowserRouter>
+    </LoginProvider>
   )
 }
 

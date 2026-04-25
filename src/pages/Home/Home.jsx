@@ -125,7 +125,7 @@ const Home = () => {
         <div className="absolute inset-0 opacity-10 pointer-events-none select-none text-[120px] flex items-center justify-center font-bold"><img src={logoImg} alt="" className=" m-100 w-100 rounded-full" /></div>
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <span className="inline-block bg-white/20 text-orange-100 text-xs font-semibold px-4 py-1.5 rounded-full mb-4 tracking-wide">
-            🕉️ Trusted by 1 Lakh+ Families Across India
+            <img className="w-4 inline mr-1"  src={logoImg} /> Trusted by 1 Lakh+ Families Across India
           </span>
           <h1 className="text-3xl md:text-5xl font-bold mb-4 leading-tight">
             Find Verified Pandits <br className="hidden md:block" /> for Every Puja & Ceremony
