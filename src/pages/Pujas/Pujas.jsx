@@ -3,8 +3,8 @@ import { useState } from "react"
 import { FiClock, FiUsers, FiChevronDown, FiChevronUp, FiArrowRight, FiX } from "react-icons/fi"
 import { FaCheckCircle } from "react-icons/fa"
 import {
-  Ring, Home, Flame, Baby, Moon, BookOpen, GraduationCap,
-  Star, Mountain, Heart, Sparkles, Sun, Layers
+  Home, Flame, Moon, BookOpen, GraduationCap,
+  Star, Mountain, Heart, Sparkles, Sun, Layers, Baby
 } from "lucide-react"
 
 const pujas = [
