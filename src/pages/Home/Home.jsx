@@ -63,12 +63,29 @@ const sacredTexts = [
   { title: "Importance of Vivah Puja", desc: "The Vivah ceremony is one of the 16 samskaras. The Saptapadi (7 vows) taken around the sacred fire bind two souls together for eternity.", extra: "The Vivah rituals include Ganesh Puja, Var Mala, Kanyadan, Mangalsutra ceremony, and Sindoor Daan. Each ritual holds deep spiritual significance. The sacred fire (Agni) is the divine witness to the union. A qualified pandit ensures all rituals are performed in the correct sequence with proper Vedic mantras.", icon: <Heart size={32} className="text-orange-500" /> },
 ]
 
+const SacredCard = ({ item }) => {
+  const [expanded, setExpanded] = useState(false)
+  return (
+    <div className="bg-white rounded-xl p-6 shadow border border-amber-100 hover:shadow-xl hover:-translate-y-2 hover:border-orange-300 transition-all duration-300 flex flex-col group" style={{ minHeight: '260px' }}>
+      <span className="text-4xl mb-3 block group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300 inline-block">{item.icon}</span>
+      <h3 className="font-bold text-gray-800 mb-2 group-hover:text-orange-500 transition-colors duration-200">{item.title}</h3>
+      <p className="text-sm text-gray-500 leading-relaxed">{item.desc}</p>
+      {expanded && (
+        <p className="text-sm text-gray-500 leading-relaxed mt-3 border-t border-amber-100 pt-3">{item.extra}</p>
+      )}
+      <button onClick={() => setExpanded(p => !p)} className="mt-auto pt-4 text-orange-500 text-sm font-semibold flex items-center gap-1 hover:underline">
+        {expanded ? "Show Less" : "Read More"} <ArrowRight size={13} className={expanded ? "rotate-90" : ""} />
+      </button>
+    </div>
+  )
+}
+
 const ITEMS_PER_PAGE = 6
 
 const Home = () => {
-  const [expandedCard, setExpandedCard] = useState(null)
   const [currentPage, setCurrentPage] = useState(1)
   const [filters, setFilters] = useState({ city: "All Cities", specializations: [], experience: "", rating: "" })
+  const [sortBy, setSortBy] = useState("relevance")
   const navigate = useNavigate()
 
   const filteredPandits = allPandits.filter(p => {
@@ -98,6 +115,11 @@ const Home = () => {
     if (filters.rating && p.rating < parseFloat(filters.rating)) return false
 
     return true
+  }).sort((a, b) => {
+    if (sortBy === "rating") return b.rating - a.rating
+    if (sortBy === "price") return a.price - b.price
+    if (sortBy === "experience") return b.experience - a.experience
+    return 0
   })
 
   const totalPages = Math.ceil(filteredPandits.length / ITEMS_PER_PAGE)
@@ -176,8 +198,8 @@ const Home = () => {
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {upcomingFestivals.map((f) => (
-            <div key={f.name} className={`rounded-xl border-2 ${f.color} p-4 flex flex-col gap-2 hover:shadow-md transition cursor-pointer`}>
-              <span className="text-3xl">{f.icon}</span>
+            <div key={f.name} className={`rounded-xl border-2 ${f.color} p-4 flex flex-col gap-2 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 cursor-pointer group overflow-hidden`}>
+              <span className="text-3xl group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300 inline-block">{f.icon}</span>
               <h3 className="font-bold text-gray-800 text-sm">{f.name}</h3>
               <p className="text-xs text-gray-500 flex items-center gap-1"><Clock size={11} /> {f.date}</p>
               <span className={`text-xs font-semibold ${f.textColor} mt-auto`}>{f.days}</span>
@@ -192,9 +214,9 @@ const Home = () => {
           <h2 className="text-xl font-bold text-gray-800 mb-5">Browse by Puja Type</h2>
           <div className="grid grid-cols-4 sm:grid-cols-8 gap-3">
             {categories.map((cat) => (
-              <button key={cat.label} onClick={() => navigate("/pujas")} className="flex flex-col items-center gap-2 bg-white rounded-xl p-3 shadow hover:shadow-md hover:border-orange-300 border border-transparent transition cursor-pointer">
-                <span className="flex items-center justify-center">{cat.icon}</span>
-                <span className="text-xs text-gray-600 font-medium text-center leading-tight">{cat.label}</span>
+              <button key={cat.label} onClick={() => navigate("/pujas")} className="flex flex-col items-center gap-2 bg-white rounded-xl p-3 shadow hover:shadow-lg hover:border-orange-400 hover:-translate-y-1 hover:bg-orange-50 border border-transparent transition-all duration-300 cursor-pointer group">
+                <span className="flex items-center justify-center group-hover:scale-125 group-hover:rotate-6 transition-transform duration-300">{cat.icon}</span>
+                <span className="text-xs text-gray-600 font-medium text-center leading-tight group-hover:text-orange-500 transition-colors duration-200">{cat.label}</span>
               </button>
             ))}
           </div>
@@ -209,53 +231,22 @@ const Home = () => {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {howItWorks.map((item, i) => (
-            <div key={item.step} className="relative bg-white rounded-xl p-6 shadow text-center border border-gray-100 hover:shadow-md transition">
+            <div key={item.step} className="relative bg-white rounded-xl p-6 shadow text-center border border-gray-100 hover:shadow-xl hover:-translate-y-2 hover:border-orange-200 transition-all duration-300 group">
               {i < howItWorks.length - 1 && (
                 <div className="hidden lg:block absolute top-10 -right-3 z-10 text-orange-300 text-xl">→</div>
               )}
-              <div className="w-12 h-12 rounded-full bg-orange-50 flex items-center justify-center mx-auto mb-3 border border-orange-100">
-                {item.icon}
+              <div className="w-12 h-12 rounded-full bg-orange-50 flex items-center justify-center mx-auto mb-3 border border-orange-100 group-hover:bg-orange-500 group-hover:scale-110 transition-all duration-300">
+                <span className="group-hover:[&>*]:text-white transition-colors duration-300">{item.icon}</span>
               </div>
               <span className="text-xs font-bold text-orange-400 tracking-widest">STEP {item.step}</span>
-              <h3 className="font-bold text-gray-800 mt-1 mb-2">{item.title}</h3>
+              <h3 className="font-bold text-gray-800 mt-1 mb-2 group-hover:text-orange-500 transition-colors duration-200">{item.title}</h3>
               <p className="text-sm text-gray-500 leading-relaxed">{item.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Puja Packages */}
-      {/* <section className="bg-orange-50 from-orange-50 to-amber-50 py-12 px-4">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-8">
-            <h2 className="text-2xl font-bold text-gray-800">Puja Packages</h2>
-            <p className="text-gray-500 text-sm mt-1">Choose a package that suits your ceremony</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {pujaPackages.map((pkg) => (
-              <div key={pkg.name} className={`bg-white rounded-2xl border-2 ${pkg.color} p-6 flex flex-col gap-4 hover:shadow-lg transition relative`}>
-                {pkg.badge && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-orange-500 text-white text-xs font-bold px-4 py-1 rounded-full shadow">{pkg.badge}</span>
-                )}
-                <div>
-                  <h3 className="font-bold text-gray-800 text-lg">{pkg.name}</h3>
-                  <p className="text-3xl font-bold text-orange-500 mt-1">{pkg.price} <span className="text-sm text-gray-400 font-normal">onwards</span></p>
-                </div>
-                <ul className="flex flex-col gap-2">
-                  {pkg.features.map((f) => (
-                    <li key={f} className="flex items-center gap-2 text-sm text-gray-600">
-                      <FaCheckCircle size={14} className="text-green-500 shrink-0" /> {f}
-                    </li>
-                  ))}
-                </ul>
-                <button onClick={() => document.getElementById("pandit-listing")?.scrollIntoView({ behavior: "smooth" })} className="mt-auto w-full bg-orange-500 hover:bg-orange-600 text-white py-2.5 rounded-xl font-semibold text-sm transition">
-                  Book This Package
-                </button>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section> */}
+    
 
       {/* Pandit Listing */}
       <section id="pandit-listing" className="max-w-7xl mx-auto px-4 sm:px-6 py-10">
@@ -266,11 +257,15 @@ const Home = () => {
               <h2 className="text-xl font-bold text-gray-800">
                 Available Pandits <span className="text-gray-400 text-base font-normal">({filteredPandits.length} found — Page {currentPage} of {totalPages})</span>
               </h2>
-              <select className="border border-gray-300 rounded-lg px-3 py-1.5 text-sm text-gray-600 outline-none focus:border-orange-400">
-                <option>Sort: Relevance</option>
-                <option>Rating: High to Low</option>
-                <option>Price: Low to High</option>
-                <option>Experience: High to Low</option>
+              <select
+                value={sortBy}
+                onChange={(e) => { setSortBy(e.target.value); setCurrentPage(1) }}
+                className="border border-gray-300 rounded-lg px-3 py-1.5 text-sm text-gray-600 outline-none focus:border-orange-400"
+              >
+                <option value="relevance">Sort: Relevance</option>
+                <option value="rating">Rating: High to Low</option>
+                <option value="price">Price: Low to High</option>
+                <option value="experience">Experience: High to Low</option>
               </select>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
@@ -302,19 +297,9 @@ const Home = () => {
             <h2 className="text-2xl font-bold text-gray-800">Sacred Knowledge</h2>
             <p className="text-gray-500 text-sm mt-1">Learn about the significance of Hindu rituals and ceremonies</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
             {sacredTexts.map((item) => (
-              <div key={item.title} className="bg-white rounded-xl p-6 shadow border border-amber-100 hover:shadow-md transition">
-                <span className="text-4xl mb-3 block">{item.icon}</span>
-                <h3 className="font-bold text-gray-800 mb-2">{item.title}</h3>
-                <p className="text-sm text-gray-500 leading-relaxed">{item.desc}</p>
-                {expandedCard === item.title && (
-                  <p className="text-sm text-gray-500 leading-relaxed mt-3 border-t border-amber-100 pt-3">{item.extra}</p>
-                )}
-                <button onClick={() => setExpandedCard(expandedCard === item.title ? null : item.title)} className="mt-4 text-orange-500 text-sm font-semibold flex items-center gap-1 hover:underline">
-                  {expandedCard === item.title ? "Show Less" : "Read More"} <ArrowRight size={13} className={expandedCard === item.title ? "rotate-90" : ""} />
-                </button>
-              </div>
+              <SacredCard key={item.title} item={item} />
             ))}
           </div>
         </div>
@@ -329,13 +314,13 @@ const Home = () => {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {testimonials.map((t) => (
-              <div key={t.name} className="bg-white rounded-xl p-5 shadow border border-gray-100 hover:shadow-md transition flex flex-col">
+              <div key={t.name} className="bg-white rounded-xl p-5 shadow border border-gray-100 hover:shadow-xl hover:-translate-y-2 hover:border-orange-200 transition-all duration-300 flex flex-col group">
                 <div className="flex items-center gap-1 mb-3">
-                  {Array.from({ length: t.rating }).map((_, i) => <Star key={i} size={14} className="text-yellow-400 fill-yellow-400" />)}
+                  {Array.from({ length: t.rating }).map((_, i) => <Star key={i} size={14} className="text-yellow-400 fill-yellow-400 group-hover:scale-110 transition-transform duration-200" style={{transitionDelay: `${i*40}ms`}} />)}
                 </div>
                 <p className="text-sm text-gray-600 leading-relaxed mb-4 flex-1">"{t.text}"</p>
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center text-orange-600 font-bold text-sm shrink-0">{t.name[0]}</div>
+                  <div className="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center text-orange-600 font-bold text-sm shrink-0 group-hover:bg-orange-500 group-hover:text-white transition-all duration-300">{t.name[0]}</div>
                   <div>
                     <p className="text-sm font-semibold text-gray-800">{t.name}</p>
                     <p className="text-xs text-gray-400 flex items-center gap-1"><MapPin size={10} /> {t.city} · {t.puja}</p>
@@ -357,9 +342,9 @@ const Home = () => {
               { icon: <Calendar size={32} className="text-orange-500" />, title: "Easy Booking", desc: "Book in minutes with flexible scheduling. Cancel up to 24 hours before." },
               { icon: <MessageSquare size={32} className="text-orange-500" />, title: "Real Reviews", desc: "Genuine ratings and reviews from verified customers only." },
             ].map((item) => (
-              <div key={item.title} className="bg-white rounded-xl p-6 shadow text-left border border-gray-100 hover:shadow-md transition">
-                <div className="mb-3">{item.icon}</div>
-                <h3 className="font-bold text-gray-800 mb-1">{item.title}</h3>
+              <div key={item.title} className="bg-white rounded-xl p-6 shadow text-left border border-gray-100 hover:shadow-xl hover:-translate-y-2 hover:border-orange-300 transition-all duration-300 group cursor-pointer">
+                <div className="mb-3 group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300 inline-block">{item.icon}</div>
+                <h3 className="font-bold text-gray-800 mb-1 group-hover:text-orange-500 transition-colors duration-200">{item.title}</h3>
                 <p className="text-sm text-gray-500">{item.desc}</p>
               </div>
             ))}

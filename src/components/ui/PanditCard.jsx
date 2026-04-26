@@ -38,8 +38,7 @@ const BookingModal = ({ pandit, onClose }) => {
                 <p className="text-gray-400 text-xs flex items-center gap-1 mt-0.5"><FiMapPin size={10} /> {pandit.location}</p>
               </div>
               <div className="ml-auto text-right">
-                <p className="text-lg font-bold text-orange-500">₹{pandit.price}</p>
-                <p className="text-xs text-gray-400">onwards</p>
+                <p className="text-lg font-bold text-orange-500">{pandit.price}</p>
               </div>
             </div>
             <form onSubmit={handleSubmit} className="flex flex-col gap-3">
@@ -117,8 +116,7 @@ const PanditCard = ({ name, specialization, location, experience, rating, review
 
         <div className="flex items-center justify-between mt-1">
           <div>
-            <span className="text-base sm:text-lg font-bold text-gray-800">₹{price}</span>
-            <span className="text-xs text-gray-400 ml-1">onwards</span>
+            <span className="text-base sm:text-lg font-bold text-gray-800">{price}</span>
           </div>
           <button
             onClick={() => setShowBooking(true)}
