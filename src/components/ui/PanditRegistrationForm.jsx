@@ -24,6 +24,7 @@ const BankInput = ({ value, onChange }) => {
   const [suggestions, setSuggestions] = useState([])
   const [showList, setShowList] = useState(false)
   const ref = useRef(null)
+  const [step, setStep] = useState(1);
 
   const handleChange = (e) => {
     const val = e.target.value
@@ -121,6 +122,8 @@ const PanditRegistrationForm = ({ onSubmit }) => {
       : [...f.availableDays, day]
   }))
 
+  const nextStep = () => setStep(prev => prev + 1)
+const prevStep = () => setStep(prev => prev - 1)
   const handleSubmit = (e) => {
     e.preventDefault()
     setSubmitted(true)

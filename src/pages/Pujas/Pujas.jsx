@@ -298,8 +298,8 @@ const Pujas = () => {
               className="flex items-center gap-2 border border-orange-400 text-orange-500 hover:bg-orange-50 px-4 py-2 rounded-lg text-sm font-medium transition"
             >
               <Filter size={15} />
-              Filter by Type
-              {selectedCategories.length > 0 && (
+              {selectedCategories.length === 1 ? selectedCategories[0] : selectedCategories.length > 1 ? `${selectedCategories.length} Types` : "Filter by Type"}
+              {selectedCategories.length > 1 && (
                 <span className="bg-orange-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">{selectedCategories.length}</span>
               )}
               <ChevronDown size={14} className={`transition-transform ${filterOpen ? 'rotate-180' : ''}`} />
@@ -369,7 +369,7 @@ const Pujas = () => {
             { category: "Festival Puja", gradient: "from-yellow-500 to-orange-400", badge: "bg-yellow-100 text-yellow-700", items: [{ name: "Diwali Lakshmi Puja", price: "₹1,100 – ₹3,100" }, { name: "Ganesh Puja", price: "₹1,100 – ₹2,100" }, { name: "Karva Chauth Puja", price: "₹500 – ₹1,500" }, { name: "Akshay Tritiya Puja", price: "₹1,100 – ₹2,100" }] },
           ].map(({ category, gradient, badge, items }) => (
             <div key={category} className="group bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-              <div className={`bg-gradient-to-r ${gradient} px-5 py-4`}>
+              <div className={`bg-gradient ${gradient} px-5 py-4`}>
                 <h3 className="font-bold text-white text-sm tracking-wide">{category}</h3>
                 <p className="text-white/70 text-xs mt-0.5">{items.length} pujas</p>
               </div>

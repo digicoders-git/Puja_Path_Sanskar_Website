@@ -31,10 +31,10 @@ const stats = [
 ]
 
 const howItWorks = [
-  { step: "01", icon: <Search size={26} className="text-orange-500" />, title: "Search by Location", desc: "Enter your city and find verified pandits available near you." },
-  { step: "02", icon: <Users size={26} className="text-orange-500" />, title: "Choose a Pandit", desc: "Browse profiles, read reviews, and select the best pandit for your ceremony." },
-  { step: "03", icon: <Calendar size={26} className="text-orange-500" />, title: "Book & Confirm", desc: "Pick your date, fill in details, and confirm your booking instantly." },
-  { step: "04", icon: <ShieldCheck size={26} className="text-orange-500" />, title: "Puja Done!", desc: "Your pandit arrives on time and performs the ceremony with full devotion." },
+  { step: "01", Icon: Search, title: "Search by Location", desc: "Enter your city and find verified pandits available near you." },
+  { step: "02", Icon: Users, title: "Choose a Pandit", desc: "Browse profiles, read reviews, and select the best pandit for your ceremony." },
+  { step: "03", Icon: Calendar, title: "Book & Confirm", desc: "Pick your date, fill in details, and confirm your booking instantly." },
+  { step: "04", Icon: ShieldCheck, title: "Puja Done!", desc: "Your pandit arrives on time and performs the ceremony with full devotion." },
 ]
 
 const testimonials = [
@@ -67,7 +67,7 @@ const SacredCard = ({ item }) => {
   const [expanded, setExpanded] = useState(false)
   return (
     <div className="bg-white rounded-xl p-6 shadow border border-amber-100 hover:shadow-xl hover:-translate-y-2 hover:border-orange-300 transition-all duration-300 flex flex-col group" style={{ minHeight: '260px' }}>
-      <span className="text-4xl mb-3 block group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300 inline-block">{item.icon}</span>
+      <span className="text-4xl mb-3  group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300 inline-block">{item.icon}</span>
       <h3 className="font-bold text-gray-800 mb-2 group-hover:text-orange-500 transition-colors duration-200">{item.title}</h3>
       <p className="text-sm text-gray-500 leading-relaxed">{item.desc}</p>
       {expanded && (
@@ -214,9 +214,10 @@ const Home = () => {
           <h2 className="text-xl font-bold text-gray-800 mb-5">Browse by Puja Type</h2>
           <div className="grid grid-cols-4 sm:grid-cols-8 gap-3">
             {categories.map((cat) => (
-              <button key={cat.label} onClick={() => navigate("/pujas")} className="flex flex-col items-center gap-2 bg-white rounded-xl p-3 shadow hover:shadow-lg hover:border-orange-400 hover:-translate-y-1 hover:bg-orange-50 border border-transparent transition-all duration-300 cursor-pointer group">
-                <span className="flex items-center justify-center group-hover:scale-125 group-hover:rotate-6 transition-transform duration-300">{cat.icon}</span>
-                <span className="text-xs text-gray-600 font-medium text-center leading-tight group-hover:text-orange-500 transition-colors duration-200">{cat.label}</span>
+              <button key={cat.label} onClick={() => navigate("/pujas")} className="flex flex-col items-center gap-2 bg-white rounded-2xl p-3 shadow-md hover:shadow-[0_8px_30px_rgba(249,115,22,0.35)] hover:border-orange-400 hover:-translate-y-2 hover:bg-orange-50 border border-transparent active:scale-95 transition-all duration-300 cursor-pointer group relative overflow-hidden">
+                <span className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-orange-50 to-white pointer-events-none" />
+                <span className="flex items-center justify-center group-hover:scale-125 group-hover:rotate-12 transition-transform duration-300 drop-shadow-sm">{cat.icon}</span>
+                <span className="text-xs text-gray-600 font-semibold text-center leading-tight group-hover:text-orange-500 transition-colors duration-200">{cat.label}</span>
               </button>
             ))}
           </div>
@@ -236,7 +237,7 @@ const Home = () => {
                 <div className="hidden lg:block absolute top-10 -right-3 z-10 text-orange-300 text-xl">→</div>
               )}
               <div className="w-12 h-12 rounded-full bg-orange-50 flex items-center justify-center mx-auto mb-3 border border-orange-100 group-hover:bg-orange-500 group-hover:scale-110 transition-all duration-300">
-                <span className="group-hover:[&>*]:text-white transition-colors duration-300">{item.icon}</span>
+                <item.Icon size={26} className="text-orange-500 group-hover:text-white transition-colors duration-300" />
               </div>
               <span className="text-xs font-bold text-orange-400 tracking-widest">STEP {item.step}</span>
               <h3 className="font-bold text-gray-800 mt-1 mb-2 group-hover:text-orange-500 transition-colors duration-200">{item.title}</h3>

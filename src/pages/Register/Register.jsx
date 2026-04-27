@@ -5,6 +5,7 @@ import { FiCalendar, FiLock, FiMessageCircle } from "react-icons/fi"
 import { FaUsers, FaRupeeSign } from "react-icons/fa"
 import PanditRegistrationForm from "../../components/ui/PanditRegistrationForm"
 
+
 const panditBenefits = [
   { icon: <FaUsers className="text-orange-500" size={20} />, title: "Reach More Customers", desc: "Get discovered by thousands of devotees searching for pandits in your city." },
   { icon: <FaRupeeSign className="text-green-500" size={20} />, title: "Earn More Income", desc: "Increase your bookings and grow your income with our platform." },
@@ -21,7 +22,7 @@ const Register = () => {
       {/* Header */}
       <section className="bg-orange-500 text-white py-8 sm:py-12 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto text-center">
-          <span className="inline-block bg-white/20 text-orange-100 text-xs font-semibold px-3 py-1 rounded-full mb-3">🕉️ Join 5000+ Verified Pandits</span>
+          <span className="inline-block bg-white/20 text-orange-100 text-xs font-semibold px-3 py-1 rounded-full mb-3"><img src={logoImg} className="w-4 inline mr-1" /> Join 5000+ Verified Pandits</span>
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2">Register as Pandit</h1>
           <p className="text-orange-100 text-sm sm:text-base max-w-xl mx-auto">Join PanditJi — India's most trusted platform to connect verified pandits with devotees across India.</p>
           <div className="flex flex-wrap justify-center gap-4 mt-5 text-xs text-orange-100">

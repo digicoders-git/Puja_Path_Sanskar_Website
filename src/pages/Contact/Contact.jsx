@@ -2,6 +2,7 @@ import { useState } from "react"
 import { FiPhone, FiMail, FiMapPin, FiClock, FiSend, FiHelpCircle } from "react-icons/fi"
 import { FaFacebookF, FaInstagram, FaYoutube, FaWhatsapp, FaCheckCircle } from "react-icons/fa"
 import { MapPin, Phone, Mail, Clock, MessageSquare, Users, ShieldCheck, Star, Building2, Landmark, Building } from "lucide-react"
+import logoImg from "../../assets/img.jpeg"
 
 const Contact = () => {
   const [form, setForm] = useState({ name: "", email: "", phone: "", subject: "", message: "" })
@@ -20,7 +21,7 @@ const Contact = () => {
       {/* Header */}
       <section className="bg-orange-500 text-white py-12 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto text-center">
-          <span className="inline-block bg-white/20 text-orange-100 text-xs font-semibold px-3 py-1 rounded-full mb-3">🕉️ We're Here to Help</span>
+          <span className="inline-block bg-white/20 text-orange-100 text-xs font-semibold px-3 py-1 rounded-full mb-3"><img src={logoImg} className="w-4 inline mr-1" /> We're Here to Help</span>
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3">Contact Us</h1>
           <p className="text-orange-100 text-sm sm:text-base max-w-xl mx-auto">We're here to help you with any queries about pandits, pujas, or bookings. Reach out anytime!</p>
         </div>

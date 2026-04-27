@@ -6,6 +6,7 @@ import { FaShieldAlt, FaStar, FaUserCheck, FaAward } from "react-icons/fa"
 import { FiArrowRight } from "react-icons/fi"
 import { useNavigate, useLocation } from "react-router-dom"
 import { MapPin, Landmark, Building2, Waves, Flame, Star, Mountain, Sun } from "lucide-react"
+import logoImg from "../../assets/img.jpeg"
 
 const ITEMS_PER_PAGE = 12
 
@@ -30,6 +31,7 @@ const whyTrust = [
 const Pandits = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [filters, setFilters] = useState({ city: "All Cities", specializations: [], experience: "", rating: "" })
+  const [activeCity, setActiveCity] = useState(null)
   const navigate = useNavigate()
   const location = useLocation()
 
@@ -104,7 +106,7 @@ const Pandits = () => {
       <section className="bg-orange-500 text-white py-10 sm:py-14 px-4 sm:px-6 text-center">
         <div className="max-w-7xl mx-auto">
           <div className="max-w-2xl">
-            <span className="inline-block bg-white/20 text-orange-100 text-xs font-semibold px-3 py-1 rounded-full mb-3 text-center">🕉️ 5000+ Verified Pandits</span>
+            <span className="inline-block bg-white/20 text-orange-100 text-xs font-semibold px-3 py-1 rounded-full mb-3 text-center"><img src={logoImg} className="w-4 inline mr-1" /> 5000+ Verified Pandits</span>
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3">Find Verified Pandits Near You</h1>
             <p className="text-orange-100 text-sm sm:text-base mb-5">Browse through our network of experienced and verified pandits across 50+ cities in India. Book instantly for any puja or ceremony.</p>
             <div className="flex flex-wrap gap-3 text-center justify-center">
@@ -140,10 +142,25 @@ const Pandits = () => {
         </div>
         <div className="grid grid-cols-4 sm:grid-cols-8 gap-3">
           {topCities.map((c) => (
-            <button key={c.city} className="flex flex-col items-center gap-1.5 bg-white rounded-xl p-3 shadow hover:shadow-md hover:border-orange-300 border border-transparent transition">
-              <div className="w-10 h-10 rounded-full bg-orange-50 flex items-center justify-center">{c.icon}</div>
-              <span className="text-xs font-semibold text-gray-700">{c.city}</span>
-              <span className="text-xs text-orange-500">{c.pandits}+</span>
+            <button
+              key={c.city}
+              onClick={() => setActiveCity(activeCity === c.city ? null : c.city)}
+              className={`group relative flex flex-col items-center gap-1.5 rounded-xl p-3 border transition-all duration-300 overflow-hidden
+                ${
+                  activeCity === c.city
+                    ? "bg-orange-500 border-orange-500 shadow-lg shadow-orange-200 scale-105"
+                    : "bg-white border-transparent shadow hover:shadow-lg hover:border-orange-300 hover:-translate-y-1 hover:scale-105"
+                }`}
+            >
+              {/* shimmer effect */}
+              <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/30 to-transparent pointer-events-none" />
+
+              <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300
+                ${activeCity === c.city ? "bg-white/20 scale-110" : "bg-orange-50 group-hover:bg-orange-100 group-hover:scale-110"}`}>
+                {c.icon}
+              </div>
+              <span className={`text-xs font-semibold transition-colors duration-300 ${activeCity === c.city ? "text-white" : "text-gray-700"}`}>{c.city}</span>
+              <span className={`text-xs font-bold transition-colors duration-300 ${activeCity === c.city ? "text-orange-100" : "text-orange-500"}`}>{c.pandits}+</span>
             </button>
           ))}
         </div>
