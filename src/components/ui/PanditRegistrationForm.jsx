@@ -138,10 +138,51 @@ const initialForm = {
   declaration: false,
 }
 
+const stepValidation = {
+  1: (f) => {
+    if (!f.fullName.trim()) return "Full Name is required"
+    if (!f.mobile.trim() || f.mobile.length !== 10) return "Valid 10-digit Mobile Number is required"
+    if (!f.email.trim()) return "Email ID is required"
+    if (!f.dob) return "Date of Birth is required"
+    if (!f.gender) return "Gender is required"
+    if (!f.currentAddress.trim()) return "Current Address is required"
+    if (!f.permanentAddress.trim()) return "Permanent Address is required"
+    if (!f.city.trim()) return "City is required"
+    if (!f.pincode.trim() || f.pincode.length !== 6) return "Valid 6-digit Pincode is required"
+    return null
+  },
+  2: (f) => {
+    if (!f.aadhar.trim() || f.aadhar.length !== 12) return "Valid 12-digit Aadhar Number is required"
+    if (!f.aadharFile) return "Aadhar Card upload is required"
+    if (!f.profilePhoto) return "Profile Photo is required"
+    return null
+  },
+  3: (f) => {
+    if (!f.experience.toString().trim()) return "Experience is required"
+    if (!f.specialization) return "Specialization is required"
+    if (!f.languages.trim()) return "Languages Known is required"
+    if (!f.basicCharge.toString().trim()) return "Basic Puja Charges is required"
+    return null
+  },
+  4: (f) => {
+    if (!f.mantraLevel) return "Mantra Level is required"
+    if (!f.timeDiscipline) return "Time Discipline is required"
+    if (!f.dressCode) return "Dress Code is required"
+    if (!f.eventHandling) return "Event Handling is required"
+    if (!f.availableCities.trim()) return "Available Cities is required"
+    if (!f.travelWilling) return "Travel Willingness is required"
+    if (!f.availability) return "Availability Type is required"
+    if (f.availableDays.length === 0) return "Please select at least one Available Day"
+    if (!f.emergency) return "Emergency Booking is required"
+    return null
+  },
+}
+
 const PanditRegistrationForm = ({ onSubmit }) => {
   const [form, setForm] = useState(initialForm)
   const [submitted, setSubmitted] = useState(false)
   const [step, setStep] = useState(1)
+  const [error, setError] = useState("")
 
   const set = (field, value) => setForm(f => ({ ...f, [field]: value }))
 
@@ -152,8 +193,18 @@ const PanditRegistrationForm = ({ onSubmit }) => {
       : [...f.availableDays, day]
   }))
 
+  const handleNext = () => {
+    const err = stepValidation[step]?.(form)
+    if (err) { setError(err); return }
+    setError("")
+    setStep(s => s + 1)
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault()
+    if (!form.upiId.trim()) { setError("UPI ID is required"); return }
+    if (!form.declaration) { setError("Please accept the declaration"); return }
+    setError("")
     setSubmitted(true)
     onSubmit && onSubmit(form)
   }
@@ -164,7 +215,7 @@ const PanditRegistrationForm = ({ onSubmit }) => {
         <CheckCircle className="mx-auto text-green-500 mb-4" size={56} />
         <p className="text-green-600 font-bold text-xl">Registration Submitted!</p>
         <p className="text-gray-400 text-sm mt-2">Our team will verify your details and contact you within 24 hours.</p>
-        <button onClick={() => { setSubmitted(false); setForm(initialForm); setStep(1) }} className="mt-6 bg-orange-500 hover:bg-orange-600 text-white px-8 py-2.5 rounded-full text-sm font-semibold transition">
+        <button onClick={() => { setSubmitted(false); setForm(initialForm); setStep(1); setError("") }} className="mt-6 bg-orange-500 hover:bg-orange-600 text-white px-8 py-2.5 rounded-full text-sm font-semibold transition">
           Register Another
         </button>
       </div>
@@ -484,19 +535,26 @@ const PanditRegistrationForm = ({ onSubmit }) => {
         </div>
       )}
 
+      {/* Error Message */}
+      {error && (
+        <div className="bg-red-50 border border-red-300 text-red-600 text-sm rounded-lg px-4 py-3">
+          ⚠️ {error}
+        </div>
+      )}
+
       {/* Navigation Buttons */}
       <div className="flex gap-3 pt-2">
         {step > 1 && (
-          <button type="button" onClick={() => setStep(s => s - 1)} className="flex-1 flex items-center justify-center gap-2 border-2 border-orange-400 text-orange-500 py-3 rounded-xl font-semibold text-sm transition hover:bg-orange-50">
+          <button type="button" onClick={() => { setError(""); setStep(s => s - 1) }} className="flex-1 flex items-center justify-center gap-2 border-2 border-orange-400 text-orange-500 py-3 rounded-xl font-semibold text-sm transition hover:bg-orange-50">
             <ChevronLeft size={16} /> Back
           </button>
         )}
         {step < 5 ? (
-          <button type="button" onClick={() => setStep(s => s + 1)} className="flex-1 flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-xl font-semibold text-sm transition">
+          <button type="button" onClick={handleNext} className="flex-1 flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-xl font-semibold text-sm transition">
             Next <ChevronRight size={16} />
           </button>
         ) : (
-          <button type="submit" disabled={!form.declaration} className="flex-1 bg-green-500 hover:bg-green-600 disabled:opacity-50 disabled:cursor-not-allowed text-white py-3 rounded-xl font-semibold text-sm transition flex items-center justify-center gap-2">
+          <button type="submit" className="flex-1 bg-green-500 hover:bg-green-600 text-white py-3 rounded-xl font-semibold text-sm transition flex items-center justify-center gap-2">
             <CheckCircle size={16} /> Submit Registration
           </button>
         )}
