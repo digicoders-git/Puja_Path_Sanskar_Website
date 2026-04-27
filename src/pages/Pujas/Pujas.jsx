@@ -354,42 +354,64 @@ const Pujas = () => {
       </section>
 
       {/* Price List Section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 py-10">
-        <div className="text-center mb-8">
-          <h2 className="text-xl sm:text-2xl font-bold text-gray-800">Puja Price List</h2>
-          <p className="text-gray-500 text-sm mt-1">Estimated prices for UP, MP, Rajasthan & Delhi NCR</p>
-          <span className="inline-block mt-2 text-xs bg-green-100 text-green-700 px-3 py-1 rounded-full font-medium">✅ Available in UP, MP, Rajasthan & Delhi NCR only</span>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
-          {[
-            { category: "Ghar / Daily Puja", gradient: "from-orange-500 to-amber-400", badge: "bg-orange-100 text-orange-600", items: [{ name: "Grih Pravesh Puja", price: "₹2,100 – ₹5,100" }, { name: "Satyanarayan Katha", price: "₹1,100 – ₹3,100" }, { name: "Vastu Shanti Puja", price: "₹2,100 – ₹5,100" }, { name: "Navgrah Puja", price: "₹2,100 – ₹4,100" }] },
-            { category: "Sanskar Puja", gradient: "from-blue-500 to-cyan-400", badge: "bg-blue-100 text-blue-600", items: [{ name: "Naamkaran Sanskar", price: "₹1,100 – ₹3,100" }, { name: "Mundan Sanskar", price: "₹2,100 – ₹5,100" }, { name: "Janeu (Upanayan)", price: "₹5,100 – ₹11,000" }, { name: "Annaprashan Sanskar", price: "₹1,100 – ₹3,100" }] },
-            { category: "Vivah Related Puja", gradient: "from-pink-500 to-rose-400", badge: "bg-pink-100 text-pink-600", items: [{ name: "Vivah Puja (Full)", price: "₹5,100 – ₹21,000" }, { name: "Lagan / Sagai Puja", price: "₹2,100 – ₹5,100" }, { name: "Haldi Ceremony Puja", price: "₹1,100 – ₹3,100" }] },
-            { category: "Special Puja", gradient: "from-purple-500 to-violet-400", badge: "bg-purple-100 text-purple-600", items: [{ name: "Mahamrityunjaya Jaap", price: "₹2,100 – ₹7,100" }, { name: "Kaal Sarp Dosh Puja", price: "₹5,100 – ₹15,000" }, { name: "Pitra Dosh Puja", price: "₹2,100 – ₹5,100" }, { name: "Rudrabhishek", price: "₹1,100 – ₹3,100" }] },
-            { category: "Festival Puja", gradient: "from-yellow-500 to-orange-400", badge: "bg-yellow-100 text-yellow-700", items: [{ name: "Diwali Lakshmi Puja", price: "₹1,100 – ₹3,100" }, { name: "Ganesh Puja", price: "₹1,100 – ₹2,100" }, { name: "Karva Chauth Puja", price: "₹500 – ₹1,500" }, { name: "Akshay Tritiya Puja", price: "₹1,100 – ₹2,100" }] },
-          ].map(({ category, gradient, badge, items }) => (
-            <div key={category} className="group bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-              <div className={`bg-gradient ${gradient} px-5 py-4`}>
-                <h3 className="font-bold text-white text-sm tracking-wide">{category}</h3>
-                <p className="text-white/70 text-xs mt-0.5">{items.length} pujas</p>
+      <section className="bg-gradient-to-b from-white to-orange-50 py-14 px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-10">
+            <span className="inline-block text-xs bg-orange-100 text-orange-600 font-semibold px-4 py-1.5 rounded-full mb-3 tracking-wide uppercase">Transparent Pricing</span>
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-800">Puja Price List</h2>
+            <p className="text-gray-500 text-sm mt-2">Estimated prices for UP, MP, Rajasthan & Delhi NCR</p>
+            <span className="inline-block mt-3 text-xs bg-green-100 text-green-700 px-4 py-1.5 rounded-full font-medium">✅ Available in UP, MP, Rajasthan & Delhi NCR only</span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+            {[
+              { category: "Ghar / Daily Puja", gradient: "from-orange-500 to-amber-400", accent: "text-orange-500", dot: "bg-orange-400", items: [{ name: "Grih Pravesh Puja", price: "₹2,100 – ₹5,100" }, { name: "Satyanarayan Katha", price: "₹1,100 – ₹3,100" }, { name: "Vastu Shanti Puja", price: "₹2,100 – ₹5,100" }, { name: "Navgrah Puja", price: "₹2,100 – ₹4,100" }] },
+              { category: "Sanskar Puja", gradient: "from-blue-500 to-cyan-400", accent: "text-blue-500", dot: "bg-blue-400", items: [{ name: "Naamkaran Sanskar", price: "₹1,100 – ₹3,100" }, { name: "Mundan Sanskar", price: "₹2,100 – ₹5,100" }, { name: "Janeu (Upanayan)", price: "₹5,100 – ₹11,000" }, { name: "Annaprashan Sanskar", price: "₹1,100 – ₹3,100" }] },
+              { category: "Vivah Related Puja", gradient: "from-pink-500 to-rose-400", accent: "text-pink-500", dot: "bg-pink-400", items: [{ name: "Vivah Puja (Full)", price: "₹5,100 – ₹21,000" }, { name: "Lagan / Sagai Puja", price: "₹2,100 – ₹5,100" }, { name: "Haldi Ceremony Puja", price: "₹1,100 – ₹3,100" }] },
+              { category: "Special Puja", gradient: "from-purple-500 to-violet-400", accent: "text-purple-500", dot: "bg-purple-400", items: [{ name: "Mahamrityunjaya Jaap", price: "₹2,100 – ₹7,100" }, { name: "Kaal Sarp Dosh Puja", price: "₹5,100 – ₹15,000" }, { name: "Pitra Dosh Puja", price: "₹2,100 – ₹5,100" }, { name: "Rudrabhishek", price: "₹1,100 – ₹3,100" }] },
+              { category: "Festival Puja", gradient: "from-yellow-500 to-orange-400", accent: "text-yellow-600", dot: "bg-yellow-400", items: [{ name: "Diwali Lakshmi Puja", price: "₹1,100 – ₹3,100" }, { name: "Ganesh Puja", price: "₹1,100 – ₹2,100" }, { name: "Karva Chauth Puja", price: "₹500 – ₹1,500" }, { name: "Akshay Tritiya Puja", price: "₹1,100 – ₹2,100" }] },
+            ].map(({ category, gradient, accent, dot, items }) => (
+              <div key={category} className="group bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300">
+                {/* Card Header */}
+                <div className={`bg-gradient-to-r ${gradient} px-5 py-5 relative overflow-hidden`}>
+                  <div className="absolute -top-4 -right-4 w-20 h-20 rounded-full bg-white/10" />
+                  <div className="absolute -bottom-6 -left-3 w-16 h-16 rounded-full bg-white/10" />
+                  <div className="relative z-10">
+                    <h3 className="font-bold text-white text-base tracking-wide">{category}</h3>
+                    <p className="text-white/80 text-xs mt-1">{items.length} puja services</p>
+                  </div>
+                </div>
+
+                {/* Price Rows */}
+                <ul className="flex flex-col gap-0 p-3">
+                  {items.map((item, idx) => (
+                    <li key={item.name} className="flex items-center justify-between px-3 py-3 rounded-xl hover:bg-gray-50 transition-colors duration-150 group/item">
+                      <div className="flex items-center gap-2.5">
+                        <span className={`w-2 h-2 rounded-full shrink-0 ${dot}`} />
+                        <span className="text-sm text-gray-700 font-medium">{item.name}</span>
+                      </div>
+                      <span className={`text-sm font-bold whitespace-nowrap ml-3 px-2.5 py-1 rounded-lg bg-gray-50 group-hover/item:bg-white ${accent}`}>
+                        {item.price}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+
+                {/* Card Footer */}
+                <div className="px-5 pb-4 pt-1">
+                  <div className={`h-0.5 w-full bg-gradient-to-r ${gradient} rounded-full opacity-30`} />
+                </div>
               </div>
-              <ul className="divide-y divide-gray-50 px-1">
-                {items.map((item) => (
-                  <li key={item.name} className="flex items-center justify-between px-4 py-3 hover:bg-orange-50 transition-colors duration-150 rounded-lg mx-1 my-0.5">
-                    <span className="text-sm text-gray-700 font-medium">{item.name}</span>
-                    <span className="text-sm font-bold text-orange-500 whitespace-nowrap ml-3">{item.price}</span>
-                  </li>
-                ))}
-              </ul>
-              <div className="px-5 py-3 border-t border-gray-50">
-                <span className={`text-xs font-semibold px-2 py-1 rounded-full ${badge}`}>{category}</span>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
+
+          <div className="mt-8 flex items-center justify-center gap-2 bg-white border border-orange-100 rounded-2xl px-6 py-4 max-w-xl mx-auto shadow-sm">
+            <span className="text-lg">📌</span>
+            <p className="text-xs text-gray-500 text-center">
+              Prices may vary slightly based on <span className="font-semibold text-gray-700">city, pandit experience,</span> and samagri inclusion.
+            </p>
+          </div>
         </div>
-        <p className="text-center text-xs text-gray-400 mt-6 bg-gray-100 rounded-xl px-4 py-3">
-          📌 Prices may vary slightly based on city, pandit experience, and samagri inclusion.
-        </p>
       </section>
 
       <section className="bg-amber-50 py-10 px-4 sm:px-6">
